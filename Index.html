@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☢️ THE WASTELANDS ☢️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>☢️☣️ THE WASTELANDS ☣️☢️</h1>
+            <h2>Nuclear Winter Survival - 2050</h2>
+        </header>
+
+        <div id="game-screen" class="screen active">
+            <!-- Name Selection (hidden after game starts) -->
+            <div id="name-selection" class="name-selection-panel">
+                <div class="story-text">
+                    <h3>📡 EMERGENCY BROADCAST - DAY 1 📡</h3>
+                    <p>The year is 2050. Nuclear war has ravaged the Earth.</p>
+                    <p>You've been hiding in an underground bunker for weeks...</p>
+                    <p>But supplies are running dangerously low.</p>
+                    <p>Strange sounds echo from the wasteland above.</p>
+                    <p>Something else survived the blast... and it's hunting.</p>
+                </div>
+                <div class="input-group">
+                    <label for="player-name">What's your name, survivor?</label>
+                    <input type="text" id="player-name" placeholder="Enter your name">
+                    <button onclick="startGame()">Enter the Wasteland</button>
+                </div>
+            </div>
+
+            <!-- Main Game Content (hidden until name is entered) -->
+            <div id="game-content" style="display: none;">
+                <div class="stats-panel">
+                    <div class="stat-bar">
+                        <label>🏥 Health</label>
+                        <div class="bar-container">
+                            <div class="bar health-bar" id="health-bar"></div>
+                            <span id="health-text">100/100</span>
+                        </div>
+                    </div>
+                    <div class="stat-bar">
+                        <label>🍞 Food</label>
+                        <div class="bar-container">
+                            <div class="bar food-bar" id="food-bar"></div>
+                            <span id="food-text">50/100</span>
+                        </div>
+                    </div>
+                    <div class="stat-bar">
+                        <label>💧 Water</label>
+                        <div class="bar-container">
+                            <div class="bar water-bar" id="water-bar"></div>
+                            <span id="water-text">40/100</span>
+                        </div>
+                    </div>
+                    <div class="stat-bar">
+                        <label>☢️ Radiation</label>
+                        <div class="bar-container">
+                            <div class="bar radiation-bar" id="radiation-bar"></div>
+                            <span id="radiation-text">0/100</span>
+                        </div>
+                    </div>
+                    <div class="day-counter">📅 Day <span id="day-counter">1</span></div>
+                </div>
+
+                <div class="main-content">
+                    <div class="event-log">
+                        <div id="log-messages"></div>
+                    </div>
+
+                    <div class="actions-panel">
+                        <h3>🏠 Bunker Actions</h3>
+                        <div class="action-buttons">
+                            <button onclick="checkBunkerSupplies()">🔍 Check Supplies</button>
+                            <button onclick="enterWasteland()">🚪 Enter Wasteland</button>
+                            <button onclick="rest()">💤 Rest</button>
+                            <button onclick="checkRadiation()">📊 Check Radiation</button>
+                            <button onclick="showGiftCodePrompt()">🎁 Redeem Gift Code</button>
+                            <button onclick="showGamepasses()">💎 Gamepasses</button>
+                            <button onclick="game.attemptCrafting()">🔨 Craft Items</button>
+                            <button onclick="useCompanion()">🐾 Companion Action</button>
+                            <button onclick="upgradeBase()">🏗️ Upgrade Base</button>
+                            <button onclick="showStats()">📊 Statistics</button>
+                        </div>
+                        
+                        <div id="mission-display" style="margin-top: 15px;">
+                            <!-- Mission info will be displayed here -->
+                        </div>
+                    </div>
+
+                    <div class="inventory-panel">
+                        <h3>🎒 Inventory</h3>
+                        <div id="inventory-items"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="game-over-screen" class="screen">
+            <div class="game-over-content">
+                <h2>💀 GAME OVER 💀</h2>
+                <p id="death-message"></p>
+                <p>Days Survived: <span id="final-day-count">0</span></p>
+                <button onclick="restartGame()">🔄 Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
